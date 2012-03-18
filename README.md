@@ -9,8 +9,9 @@ For implemetation, see this article for details:
 The following modification has been applied to the original project:
 1. Class AndroidAppFetcher to fetch the info of a single app;
 2. Language setting could be specfied for fetching apps;
-3. Fetch icon, screen and banner image links of an app.
-4. A setup.py for the package installation.  
+3. Fetch icon, screen and banner image links of an app;
+4. A setup.py for the package installation;
+5. Crawl app info from Google Play SHOP ANDROID APPS.
 
 Installing dependencies:
 
