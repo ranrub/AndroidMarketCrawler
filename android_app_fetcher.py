@@ -95,11 +95,11 @@ class AndroidAppFetcher(object):
         invalid pages (as movies will tend to link to other movies,
         not to other apps).
         """
-        if self.url == "https://market.android.com/":
+        if self.url == "https://play.google.com/store/apps/":
             return True
-        if self.url.startswith("https://market.android.com/details?id=apps_topselling_paid"):
+        if self.url.startswith("https://play.google.com/store/apps/details?id=apps_topselling_paid"):
             return True
-        if self.url.startswith("https://market.android.com/details?id=apps_topselling_free"):
+        if self.url.startswith("https://play.google.com/store/apps/details?id=apps_topselling_free"):
             return True
         if not re.search(r'details|developer', self.url):
             return False
@@ -130,8 +130,8 @@ class AndroidAppFetcher(object):
         params = self.query_vars(self.url)
         if not params.get('id'): return None
         if not self.doc('div.apps.details-page'): return None
-        if not any( [re.search(r'/apps', a.get('href', '')) for a in self.doc('.breadcrumbs a')] ):
-            return None
+        #if not any( [re.search(r'/apps', a.get('href', '')) for a in self.doc('.breadcrumbs a')] ):
+        #    return None
         #if 'Apps' not in self.doc('.page-content .breadcrumbs a').text():
         #    return None
 
@@ -221,7 +221,7 @@ class AndroidAppFetcher(object):
         Converts relative URL to a Marketplace absolute URL.
         """
         if url and url.startswith('/'):
-            return "https://market.android.com" + url
+            return "https://play.google.com/store/apps" + url
         return url or ''
         
 if __name__ == '__main__':
@@ -229,7 +229,7 @@ if __name__ == '__main__':
         sys.stderr.write("\nERROR: target package name is missing!\n\n")
         sys.exit(1)
 
-    url = "https://market.android.com/details?id=%s"%sys.argv[1]
+    url = "https://play.google.com/store/apps/details?id=%s"%sys.argv[1]
     fetcher = AndroidAppFetcher(url)
     fetcher.fetch_content()
     if fetcher.app_info:
