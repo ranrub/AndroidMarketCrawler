@@ -179,7 +179,7 @@ class AndroidAppFetcher(object):
         match = [a.text for a in self.doc('.doc-metadata-list dd a') if 'category' in a.attrib.get('href')]
         if match: app_info['category'] = match[0]
             
-        match = [re.search(r'/apps/(\w+)\?', a.get('href', '')) for a in self.doc('.breadcrumbs a')]
+        match = [re.search(r'/store/apps/category/(\w+)\?', a.get('href', '')) for a in self.doc('dd a')]
         if match and match[-1]:
             app_info['category_tag'] = match[-1].groups()[0]
             
