@@ -54,7 +54,7 @@ class AndroidMarketCrawler(object):
         # the queue receives URLs to visit
         self.queue = eventlet.Queue()
         # our root URL, the first to be fetched
-        self.queue.put("https://market.android.com/")
+        self.queue.put("https://play.google.com/store/apps")
         # after a fetch of an app is finished, results get pushed in
         # this queue
         self.results = eventlet.Queue()
