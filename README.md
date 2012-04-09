@@ -29,6 +29,9 @@ pip install -r reqs.txt
 Usage:
 
 ```
+#fetch the info of a single app
 python android_app_fecher.py app.package.name
+
+#crawl the Android Apps on Google Play
 python android_market_crawler.py path/to/destination.json_lines
 ```
