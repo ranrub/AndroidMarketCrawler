@@ -154,6 +154,10 @@ class AndroidAppFetcher(object):
             'rating_count': int(re.sub(r'\D+', '', self.doc('[itemprop=ratingCount]').text() or '0')),
             'rating_value': self.doc('[itemprop=ratingValue]').attr['content'],
             'description_html': self.doc('#doc-original-text').html(),
+            'more-from-developer': [
+                self.query_vars(a.attrib['href'])['id'] 
+                for a in self.doc('[data-analyticsid=more-from-developer] a.common-snippet-title')
+            ],
             'users_also_installed': [
                 self.query_vars(a.attrib['href'])['id'] 
                 for a in self.doc('[data-analyticsid=users-also-installed] a.common-snippet-title')
