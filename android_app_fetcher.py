@@ -12,6 +12,8 @@ import urllib2
 # selectors (awesome!)
 from pyquery import pyquery as pq
 
+from datetime import datetime
+
 class AndroidAppFetcher(object):
     '''
     Fetcher of a single app.
@@ -151,6 +153,7 @@ class AndroidAppFetcher(object):
                 for a in self.doc('.doc-overview a') 
                 if a.attrib.get('href', '').startswith('mailto:')
             ])),
+            'date_published': datetime.strptime(self.doc('[itemprop=datePublished]').text(),'%B %d, %Y').strftime('%Y-%m-%d'),
             'rating_count': int(re.sub(r'\D+', '', self.doc('[itemprop=ratingCount]').text() or '0')),
             'rating_value': self.doc('[itemprop=ratingValue]').attr['content'],
             'description_html': self.doc('#doc-original-text').html(),
