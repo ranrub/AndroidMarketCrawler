@@ -54,7 +54,7 @@ class AndroidMarketCrawler(object):
         # the queue receives URLs to visit
         self.queue = eventlet.Queue()
         # our root URL, the first to be fetched
-        self.queue.put("https://play.google.com/store/apps")
+        self.queue.put("https://play.google.com/store/apps/details?id=com.google.android.gm")
         # after a fetch of an app is finished, results get pushed in
         # this queue
         self.results = eventlet.Queue()
@@ -130,9 +130,9 @@ class AndroidMarketCrawler(object):
             # pushing new links down the queue for processing later
             for link in fetcher.all_links:
                 if not link: continue
-                uid = fetcher.get_id(url)
-                if uid in self.seen_app_ids: continue
-                self.queue.put(fetcher.absolute_url(link))
+                uid = fetcher.get_id(link)
+                if uid in self.seen_app_ids or (link.find('/details?')==-1): continue
+                self.queue.put(fetcher.absolute_url('/details?id='+uid))
 
         except urllib2.HTTPError, ex:
             # silently ignores errors, even though the script will not
