@@ -42,7 +42,7 @@ class AndroidMarketCrawler(object):
 
     Usage:
     
-      for app in AndroidMarketCrawler(concurrency=10):
+      for app in AndroidMarketCrawler(concurrency=2):
           # app is a dictionary with the values of a retrieved app
           print app['dev_name']
     """
