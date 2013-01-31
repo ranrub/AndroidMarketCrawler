@@ -12,6 +12,7 @@ import urllib2
 # selectors (awesome!)
 from pyquery import pyquery as pq
 
+# using datetime to convert date to machine-readable (sql compatible)
 from datetime import datetime
 
 class AndroidAppFetcher(object):
@@ -172,7 +173,7 @@ class AndroidAppFetcher(object):
             'icon_link': self.doc('.doc-banner-icon img').attr('src'),
             'screenshot_links': [ a.get('src') for a in self.doc('.screenshot-carousel-content-container img') ],
             'banner_link': self.doc('.doc-banner-image-container img').attr('src'),
-            
+            'permissions': [ a.text for a in self.doc('div.doc-permission-description') ]
         }
 
         match = re.findall(r'.*[\d\.]+', self.doc('.buy-button-price').text())
